@@ -35,6 +35,10 @@ def menu_principal():
 
     rect_txt_play = txt_play.get_rect(center=rect_play.center)
     rect_txt_sair = txt_sair.get_rect(center=rect_sair.center)
+    #Nome do Jogo no Menu Principal
+    fonte_titulo = pygame.font.Font("Minecraft.ttf", 120)
+    titulo = fonte_titulo.render("FutComp", True, (255, 215, 0))
+    titulo_rect = titulo.get_rect(center=(largura // 2 + 20, 150))
 
     while True:
         tela.blit(tela_de_fundo, (0, 0))
@@ -44,9 +48,11 @@ def menu_principal():
 
         tela.blit(txt_play, rect_txt_play)
         tela.blit(txt_sair, rect_txt_sair)
+        tela.blit(titulo, titulo_rect)
 
         mouse_pos = pygame.mouse.get_pos()
-
+        
+        pygame.display.update()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -73,7 +79,7 @@ barulho_gol.set_volume(0.5)
 
 #FONTES 
 score_font = pygame.font.Font(None, 100)
-gol_font = pygame.font.Font(None, 140)
+gol_font = pygame.font.Font("Minecraft.ttf", 140)
 timer_font = pygame.font.Font(None, 50)
 
 texto_gol = gol_font.render("GOOOOOOOOL!", True, "yellow")
@@ -151,7 +157,6 @@ def animate_ball():
         ball_speed_x *= -1
 
 def animate_player():
-    # lê a variável global player_speed
     player.y += player_speed
     player.top = max(player.top, 0)
     player.bottom = min(player.bottom, altura)
@@ -195,7 +200,7 @@ def jogar():
     player_points = 0
     estado_jogo = JOGANDO
     jogo_parado = False
-    player_speed = 0 # Garante que começa parado
+    player_speed = 0 
     inicio_partida = pygame.time.get_ticks()
     reset_ball()
     pygame.mixer.music.play(-1)
@@ -271,5 +276,5 @@ def jogar():
         pygame.display.update()
         clock.tick(60)
 
-# --- EXECUÇÃO ---
-menu_principal()
+
+menu_principal() 
